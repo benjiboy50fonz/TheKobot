@@ -1,0 +1,131 @@
+{
+    "name": "kotlin-for-frc",
+    "displayName": "Kotlin For FRC",
+    "description": "Kotlin for FRC is an unofficial companion extension to the official WPILib extension which adds support for Kotlin",
+    "version": "2020.2.1",
+    "publisher": "Brenek",
+    "engines": {
+        "vscode": "^1.37.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "icon": "images/wpilib-with-kotlin_K-128x128.png",
+    "activationEvents": [
+        "workspaceContains:.wpilib/wpilib_preferences.json",
+        "onCommand:kotlinforfrc.createNew",
+        "onCommand:kotlinforfrc.convertJavaProject",
+        "onCommand:kotlinforfrc.forceCompliance",
+        "onCommand:kotlinforfrc.changeComplianceTestPref",
+        "onCommand:kotlinforfrc.toggleChangelog",
+        "onCommand:kotlinforfrc.showChangelog",
+        "onCommand:kotlinforfrc.resetAutoShowChangelog"
+    ],
+    "main": "./dist/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "kotlinforfrc.convertJavaProject",
+                "title": "Kotlin-FRC: Convert Java Project to Kotlin"
+            },
+            {
+                "command": "kotlinforfrc.createNew",
+                "title": "Kotlin-FRC: Create new class/command here"
+            },
+            {
+                "command": "kotlinforfrc.forceCompliance",
+                "title": "Kotlin-FRC: Update GradleRio and check for Main.kt"
+            },
+            {
+                "command": "kotlinforfrc.changeComplianceTestPref",
+                "title": "Kotlin-FRC: Change GradleRio Checks"
+            },
+            {
+                "command": "kotlinforfrc.showChangelog",
+                "title": "Kotlin-FRC: Show Changelog"
+            },
+            {
+                "command": "kotlinforfrc.toggleChangelog",
+                "title": "Kotlin-FRC: Toggle Auto-Show Changelog"
+            },
+            {
+                "command": "kotlinforfrc.resetAutoShowChangelog",
+                "title": "Kotlin-FRC: Reset Auto-Show Changelog"
+            }
+        ],
+        "menus": {
+            "explorer/context": [
+                {
+                    "when": "explorerResourceIsFolder && isWPILibProject",
+                    "command": "kotlinforfrc.createNew",
+                    "group": "frc-kotlin"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "command": "kotlinforfrc.convertJavaProject",
+                    "when": "isWPILibProject"
+                },
+                {
+                    "command": "kotlinforfrc.createNew",
+                    "when": "isWPILibProject && !isWPILibProject"
+                },
+                {
+                    "command": "kotlinforfrc.forceCompliance",
+                    "when": "isWPILibProject"
+                },
+                {
+                    "command": "kotlinforfrc.changeComplianceTestPref",
+                    "when": "isWPILibProject"
+                },
+                {
+                    "command": "kotlinforfrc.showChangelog"
+                },
+                {
+                    "command": "kotlinforfrc.toggleChangelog"
+                },
+                {
+                    "command": "kotlinforfrc.resetAutoShowChangelog"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "webpack --mode production",
+        "compile": "webpack --mode none",
+        "watch": "webpack --mode none --watch",
+        "test-compile": "tsc -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install",
+        "test": "npm run test-compile && node ./node_modules/vscode/bin/test && run-script-os",
+        "test:win32": "echo Resetting testing workspace && reset-testing-workspace.bat",
+        "test:linux:darwin": "chmod +x reset-testing-workspace.sh && echo Resetting testing workspace && ./reset-testing-workspace.sh"
+    },
+    "devDependencies": {
+        "@types/cross-spawn": "^6.0.0",
+        "@types/mocha": "^2.2.42",
+        "@types/node": "^8.10.25",
+        "cross-spawn": "^6.0.5",
+        "run-script-os": "^1.0.5",
+        "ts-loader": "^5.3.3",
+        "tslint": "^5.8.0",
+        "typescript": "^2.9.2",
+        "vscode": "^1.1.33",
+        "webpack": "^4.29.6",
+        "webpack-cli": "^3.3.11"
+    },
+    "dependencies": {
+        "@types/rimraf": "^2.0.2",
+        "@types/semver": "^6.0.1",
+        "rimraf": "^2.0.2",
+        "semver": "^6.1.2",
+        "vscode-extension-telemetry": "^0.1.2"
+    },
+    "extensionDependencies": [
+        "wpilibsuite.vscode-wpilib"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zPaw/kotlin-for-frc.git"
+    },
+    "license": "MIT"
+}
