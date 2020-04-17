@@ -5,28 +5,22 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-/**
- * An example command that uses an example subsystem.
- */
-class ExampleCommand : CommandBase() {
-    
+object ExampleSubsystem : SubsystemBase() {
     /**
-     * Creates a new ExampleCommand.
-     *
-     * @param subsystem The subsystem used by this command.
+     * Creates a new ExampleSubsystem.
      */
 
-    init {
-        addRequirements(ExampleSubsystem)
-    }
+    init {}
+    
+    /**
+     * Will be called periodically whenever the CommandScheduler runs.
+     */
 
-    override fun initialize() {
-        println("Example Command Ran! - Ben")
-    }
+    override fun periodic() {
 
+    }
 }
