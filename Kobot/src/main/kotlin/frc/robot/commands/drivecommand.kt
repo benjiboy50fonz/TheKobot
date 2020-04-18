@@ -1,25 +1,30 @@
-package frc.robot.commands;
+package frc.robot.commands
 
-import frc.robot.subsystems.BaseDrive;
+import frc.robot.subsystems.TankDrive
 
-import frc.robot.Layout;
+import frc.robot.Layout
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandBase
 
 class DriveCommand : CommandBase() {
+
     init {
-        addRequirements(BaseDrive)
+        addRequirements(TankDrive)
     }
 
     override fun initialize() {
-        BaseDrive.stop()
+        TankDrive.stop()
     }
 
     override fun execute() {
-        //TankDrive.move(0.2, 3.1, 4.1)
-            //Layout.driveController.getRawAxis(1),
-           // Layout.driveController.getRawAxis(3)
-        //)
+        TankDrive.move(
+            y = Layout.driveController.getRawAxis(1),
+            rotate = Layout.driveController.getRawAxis(3)
+        )
+    }
+
+    override fun end(interrupted: Boolean) {
+        TankDrive.stop()
     }
 
 }

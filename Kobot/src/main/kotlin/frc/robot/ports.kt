@@ -5,22 +5,19 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot
 
 /**
- * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
- * constants.  This class should not be used for any other purpose.  All constants should be
- * declared globally (i.e. public static).  Do not put anything functional in this class.
- * <p>
- * It is advised to statically import this class (or one of its inner classes) wherever the
- * constants are needed, to reduce verbosity.
+ * This class is for the CAN ports, PWM ports, and the liking. Pretty much the same as Pybot ports,
+ * however I  implemented a slightly different layout due to restrictions.
  **/
+
 object Ports {
 
     object DriveMotors {
-        val FrontLeftMotor = 1
-        val FrontRightMotor = 2
-        val BackLeftMotor = 3
-        val BackRightMotor = 4
+        const val FrontLeftMotor = 1
+        const val FrontRightMotor = 2
+        const val BackLeftMotor = 3
+        const val BackRightMotor = 4
     }
 }

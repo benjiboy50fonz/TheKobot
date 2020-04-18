@@ -1,32 +1,44 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX
+import com.ctre.phoenix.motorcontrol.ControlMode
+
+import edu.wpi.first.wpilibj2.command.SubsystemBase
+
 import frc.robot.Ports
 
-object BaseDrive : TankDrive() {
+open class BaseDrive : SubsystemBase() {
 
-    val driveMotors = listOf<WPI_TalonFX>(
-                                            WPI_TalonFX(Ports.DriveMotors.FrontLeftMotor),
-                                            WPI_TalonFX(Ports.DriveMotors.FrontRightMotor),
-                                            WPI_TalonFX(Ports.DriveMotors.BackLeftMotor),
-                                            WPI_TalonFX(Ports.DriveMotors.BackRightMotor)
-        )
+    open val driveMotors = listOf(
+            WPI_TalonFX(Ports.DriveMotors.FrontLeftMotor),
+            WPI_TalonFX(Ports.DriveMotors.FrontRightMotor),
+            WPI_TalonFX(Ports.DriveMotors.BackLeftMotor),
+            WPI_TalonFX(Ports.DriveMotors.BackRightMotor)
+    )
 
-    private var activeMotors: List<WPI_TalonFX> = emptyList()
+    open var activeMotors = emptyList<WPI_TalonFX>()
 
     init {
-        _configureMotors(driveMotors) // Empty list for active motors, later configured.
+        _configureMotors() // Empty list for active motors, later configured.
     }
 
-    fun move(x: Double, y: Double, rotate: Double) {
-        var speeds = _calculateSpeeds(x, y, rotate)
+    fun move(x: Double = 0.0, y: Double, rotate: Double) {
+        val speeds = _calculateSpeeds(x, y, rotate).toList()
 
-        for (motor in (this.activeMotors zip speeds)) motor.get(0).set(ControlMode.PercentOutput, motor.get(1))
-
+        for (motor in (activeMotors zip speeds)) { // Motor is not a list, but a pair. call motor.toList()... in order to use list stuff.
+            motor.first.set(ControlMode.PercentOutput, motor.second)
+        }
     }
 
     fun stop() {
-        for (motor in this.activeMotors) motor.stopMotor()
+        for (motor in activeMotors) motor.stopMotor()
     }
 
+    open fun _configureMotors() {
+        throw NotImplementedError("Well this ain't Python.")
+    }
+
+    open fun _calculateSpeeds(x: Double, y: Double, rotate: Double): Pair<Double, Double> {
+        throw NotImplementedError("Well this ain't Python.")
+    }
 }
