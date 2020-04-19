@@ -7,14 +7,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.BaseDrive;
-import frc.robot.subsystems.TankDrive;
+import frc.robot.commands.intake.RunIntake
+import frc.robot.commands.intake.RunOutake
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 
@@ -48,7 +44,8 @@ class RobotContainer
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
     fun configureButtonBindings() {
-     // Add stuff here   
+        Controls.driverController.createButton("A").toggleWhenPressed(RunIntake())
+        Controls.driverController.createButton("B").toggleWhenPressed(RunOutake())
     }
 
 

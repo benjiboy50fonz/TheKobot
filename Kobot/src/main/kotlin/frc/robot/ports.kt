@@ -8,11 +8,16 @@
 package frc.robot
 
 /**
- * This class is for the CAN ports, PWM ports, and the liking. Pretty much the same as Pybot ports,
- * however I  implemented a slightly different layout due to restrictions.
+ * This class is for the CAN ports, PWM ports, control IDs, and the liking. Pretty much the same as Pybot ports,
+ * however I implemented a slightly different layout due to restrictions.
  **/
 
 object Ports {
+
+    object Controllers {
+        const val DriverControllerID = 0
+        const val OperatorControllerID = 1
+    }
 
     object DriveMotors {
         const val FrontLeftMotor = 1
@@ -20,4 +25,9 @@ object Ports {
         const val BackLeftMotor = 3
         const val BackRightMotor = 4
     }
+
+    object Intake {
+        const val IntakeMotor = 13
+    }
+
 }

@@ -1,10 +1,9 @@
-package frc.robot.commands
+package frc.robot.commands.drivetrain
 
 import frc.robot.subsystems.DriveTrain
 
-import frc.robot.Layout
-
 import edu.wpi.first.wpilibj2.command.CommandBase
+import frc.robot.Controls
 
 class DriveCommand : CommandBase() {
 
@@ -18,8 +17,8 @@ class DriveCommand : CommandBase() {
 
     override fun execute() {
         DriveTrain.move(
-            y = Layout.driveController.getRawAxis(1),
-            rotate = Layout.driveController.getRawAxis(3)
+            y = Controls.driverController.getRawAxis(1),
+            rotate = Controls.driverController.getRawAxis(3)
         )
     }
 

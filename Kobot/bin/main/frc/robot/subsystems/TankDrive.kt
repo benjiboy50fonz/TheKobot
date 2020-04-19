@@ -1,24 +1,22 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
+abstract class TankDrive : BaseDrive() {
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX
-
-open class TankDrive : SubsystemBase() {
-
-    fun _configureMotors(driveMotors: List<WPI_TalonFX>) {
-        var activeMotors = listOf<Any>(driveMotors.get(0), driveMotors.get(1))
+    override fun _configureMotors() {
+        activeMotors = listOf(driveMotors[0], driveMotors[1])
 
         if (driveMotors.size == 4) {
-            driveMotors.get(2).follow(driveMotors.get(0))
-            driveMotors.get(1).follow(driveMotors.get(3))
+            driveMotors[2].follow(driveMotors[0])
+            driveMotors[1].follow(driveMotors[3])
+        }
+
+        for (motor in activeMotors) {
+            motor.setSensorPhase(true)
         }
 
     }
 
-    fun _calculateSpeeds(x: Double, y: Double, rotate: Double): List<Double> {
-        return listOf<Double>((y + rotate), (-y + rotate))
+    override fun _calculateSpeeds(x: Double, y: Double, rotate: Double): List<Double> {
+        return listOf((y + rotate), (-y + rotate))
     }
-
-
 }
