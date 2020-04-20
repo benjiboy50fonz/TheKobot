@@ -1,10 +1,10 @@
 package frc.robot.commands.ballsystem
 
-import edu.wpi.first.wpilibj2.command.CommandBase
+import frc.robot.cougartools.CougarCommand
 
 import frc.robot.subsystems.BallSystem
 
-class RunAll : CommandBase() {
+class RunAll : CougarCommand() {
 
     init{
         addRequirements(BallSystem)

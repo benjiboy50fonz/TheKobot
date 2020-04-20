@@ -1,13 +1,12 @@
 package frc.robot.subsystems
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase
-
 import frc.robot.Ports
+import frc.robot.cougartools.CougarSubsystem
 
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 
-object Intake : SubsystemBase() {
+object Intake : CougarSubsystem() {
 
     private val intakeMotor = CANSparkMax(Ports.Intake.IntakeMotor, MotorType.kBrushless).apply {
         inverted = true

@@ -3,13 +3,15 @@ package frc.robot.subsystems
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase
+import com.kauailabs.navx.frc.AHRS
 
 import frc.robot.Ports
 
 import frc.robot.commands.drivetrain.DriveCommand
 
-abstract class BaseDrive : SubsystemBase() {
+import frc.robot.cougartools.CougarSubsystem
+
+abstract class BaseDrive : CougarSubsystem() {
 
     open val driveMotors = listOf(
             WPI_TalonFX(Ports.DriveMotors.FrontLeftMotor),
@@ -20,8 +22,13 @@ abstract class BaseDrive : SubsystemBase() {
 
     open var activeMotors = emptyList<WPI_TalonFX>()
 
+    private val navX = AHRS().apply { calibrate() }
+
+    private val flatAngle = 0
+
     init {
         this._configureMotors() // Empty list for active motors, later configured.
+        navX.reset()
     }
 
     fun move(x: Double = 0.0, y: Double, rotate: Double) {
@@ -37,7 +44,19 @@ abstract class BaseDrive : SubsystemBase() {
     }
 
     fun getAngle(): Double {
-        return 90.0
+        return navX.angle // I'm guessing this is right...
+    }
+
+    fun resetAngle() {
+        navX.reset()
+    }
+
+    fun getAngleTo(angle: Double): Double {
+        return (angle - getAngle())
+    }
+
+    fun getTilt(): Float {
+        return navX.pitch
     }
 
     open fun _configureMotors() {

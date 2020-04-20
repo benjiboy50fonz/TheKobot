@@ -2,10 +2,10 @@ package frc.robot.commands.drivetrain
 
 import frc.robot.subsystems.DriveTrain
 
-import edu.wpi.first.wpilibj2.command.CommandBase
 import frc.robot.Controls
+import frc.robot.cougartools.CougarCommand
 
-class DriveCommand : CommandBase() {
+class DriveCommand : CougarCommand() {
 
     init {
         addRequirements(DriveTrain)

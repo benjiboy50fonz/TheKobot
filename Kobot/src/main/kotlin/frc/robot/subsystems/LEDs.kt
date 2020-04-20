@@ -4,8 +4,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 import edu.wpi.first.wpilibj.Spark
 
 import frc.robot.Ports
+import frc.robot.cougartools.CougarSubsystem
 
-object LEDs : SubsystemBase() {
+object LEDs : CougarSubsystem() {
 
     private val controller = Spark(Ports.LEDSystem.Controller)
 

@@ -1,17 +1,18 @@
 package frc.robot.subsystems
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase
 import edu.wpi.first.wpilibj.DigitalInput
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX
 import com.ctre.phoenix.motorcontrol.ControlMode
 import com.ctre.phoenix.motorcontrol.NeutralMode
 
+import frc.robot.cougartools.CougarSubsystem
+
 import frc.robot.Ports
 
-object BallSystem : SubsystemBase() {
+object BallSystem : CougarSubsystem() {
 
-    private val lowerConveyorMotor = WPI_TalonSRX(Ports.BallSystem.LowerConveyor).apply() {
+    private val lowerConveyorMotor = WPI_TalonSRX(Ports.BallSystem.LowerConveyor).apply {
         setNeutralMode(NeutralMode.Brake)
     }
 

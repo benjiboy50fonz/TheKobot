@@ -1,10 +1,10 @@
 package frc.robot.commands.intake
 
-import edu.wpi.first.wpilibj2.command.CommandBase
+import frc.robot.cougartools.CougarCommand
 
 import frc.robot.subsystems.Intake
 
-class RunOutake : CommandBase() {
+class RunOutake : CougarCommand() {
     init {
         addRequirements(Intake)
     }

@@ -5,16 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot
 
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Command
 
 import frc.robot.commands.intake.RunIntake
 import frc.robot.commands.intake.RunOutake
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 
-import frc.robot.autonomous.Auto;
+import frc.robot.autonomous.Auto
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -33,8 +33,8 @@ class RobotContainer
      */
     init {
         // Configure the button bindings
-        configureButtonBindings();
-        
+        configureButtonBindings()
+
     }
 
     /**
@@ -60,6 +60,6 @@ class RobotContainer
      */
     fun getAutonomousCommand(): Command {
         // An ExampleCommand will run in autonomous
-        return autonomousCommand;
+        return autonomousCommand
     }
 }
