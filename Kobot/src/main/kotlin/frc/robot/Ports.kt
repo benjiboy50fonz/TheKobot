@@ -30,4 +30,16 @@ object Ports {
         const val IntakeMotor = 13
     }
 
+    object BallSystem {
+        const val LowerConveyor = 10
+        const val VerticalConveyor = 9
+
+        const val ShooterSensor = 2 // DI/O
+        const val LowerConveyorSensor = 0 // DI/O
+    }
+
+    object LEDSystem {
+        const val Controller = 12
+    }
+
 }

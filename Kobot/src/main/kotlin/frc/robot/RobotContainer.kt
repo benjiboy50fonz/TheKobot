@@ -44,8 +44,12 @@ class RobotContainer
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
     fun configureButtonBindings() {
-        Controls.driverController.createButton("A").toggleWhenPressed(RunIntake())
-        Controls.driverController.createButton("B").toggleWhenPressed(RunOutake())
+        Controls.driverController.A.toggleWhenPressed(RunIntake())
+        Controls.driverController.B.toggleWhenPressed(RunOutake())
+
+        Controls.operatorController.A.toggleWhenPressed(RunIntake())
+        Controls.operatorController.B.toggleWhenPressed(RunOutake())
+
     }
 
 

@@ -8,6 +8,7 @@ import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 
 object Intake : SubsystemBase() {
+
     private val intakeMotor = CANSparkMax(Ports.Intake.IntakeMotor, MotorType.kBrushless).apply {
         inverted = true
     }
@@ -16,12 +17,12 @@ object Intake : SubsystemBase() {
         intakeMotor.set(0.6)
     }
 
-    fun outake() {
-        intakeMotor.set(-0.6)
-    }
-
     fun slowIntake() {
         intakeMotor.set(0.4)
+    }
+
+    fun outake() {
+        intakeMotor.set(-0.6)
     }
 
     fun stopIntake() {

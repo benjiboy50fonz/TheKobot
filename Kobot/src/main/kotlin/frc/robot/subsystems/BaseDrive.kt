@@ -7,6 +7,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 
 import frc.robot.Ports
 
+import frc.robot.commands.drivetrain.DriveCommand
+
 abstract class BaseDrive : SubsystemBase() {
 
     open val driveMotors = listOf(
@@ -19,7 +21,7 @@ abstract class BaseDrive : SubsystemBase() {
     open var activeMotors = emptyList<WPI_TalonFX>()
 
     init {
-        _configureMotors() // Empty list for active motors, later configured.
+        this._configureMotors() // Empty list for active motors, later configured.
     }
 
     fun move(x: Double = 0.0, y: Double, rotate: Double) {
@@ -46,4 +48,9 @@ abstract class BaseDrive : SubsystemBase() {
         throw NotImplementedError("Well this ain't Python.")
         return listOf(0.0, 0.0)
     }
+
+    init {
+        defaultCommand = DriveCommand()
+    }
+
 }

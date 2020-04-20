@@ -5,33 +5,35 @@ import edu.wpi.first.wpilibj.Joystick
 import edu.wpi.first.wpilibj2.command.button.JoystickButton
 import edu.wpi.first.wpilibj2.command.button.POVButton
 
-class LogitechDualShock(id_: Int) : Joystick(id_){
+class LogitechDualShock(id_: Int) : Joystick(id_) {
 
-    private val buttonNames = mapOf(
-            "A" to 2,
-            "B" to 3,
-            "X" to 1,
-            "Y" to 4,
-            "LeftBumper" to 5,
-            "RightBumper" to 6,
-            "LeftTrigger" to 7,
-            "RightTrigger" to 8,
-            "Back" to 9,
-            "Start" to 10,
-            "LeftJoystick" to 11,
-            "RightJoystick" to 12,
-            "DPadUp" to 20,
-            "DPadDown" to 22,
-            "DPadRight" to 21,
-            "DPadLeft" to 23
-    )
+    val A = createButton(2)
+    val B = createButton(3)
+    val X = createButton(1)
+    val Y = createButton(4)
 
-    fun createButton(button: String?): edu.wpi.first.wpilibj2.command.button.Button {
-        return if (this.buttonNames[button]!!.toInt() >= 20) {
-            POVButton(this, this.buttonNames[button]!!.toInt())
-        }
-        else {
-            JoystickButton(this, this.buttonNames[button]!!.toInt())
+    val LeftBumper = createButton(5)
+    val RightBumper = createButton(6)
+    val LeftTrigger = createButton(7)
+    val RightTrigger = createButton(8)
+
+    val Back = createButton(9)
+    val Start = createButton(10)
+
+    val LeftJoystick = createButton(11)
+    val RightJoystick = createButton(12)
+
+    val DPadUp = createButton(20)
+    val DPadDown = createButton(22)
+    val DPadRight = createButton(21)
+    val DPadLeft = createButton(23)
+
+    fun createButton(button: Int): edu.wpi.first.wpilibj2.command.button.Button {
+        return if (button >= 20) {
+            POVButton(this, button)
+        } else {
+            JoystickButton(this, button)
         }
     }
+
 }
