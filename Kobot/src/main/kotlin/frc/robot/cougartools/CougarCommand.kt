@@ -38,5 +38,7 @@ abstract class CougarCommand : CommandBase() {
         return mappy
     }
 
+    open fun pushPIDs() {}
+
 
 }

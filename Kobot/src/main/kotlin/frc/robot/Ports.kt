@@ -30,6 +30,21 @@ object Ports {
         const val IntakeMotor = 13
     }
 
+    object Shooter {
+        const val ShooterLeadMotor = 5
+        const val ShooterSlaveMotor = 6
+    }
+
+    object Turret {
+        const val TurretMotor = 8
+        const val TurretLimitSwitch = 8 // DI/O
+    }
+
+    object Hood {
+        const val HoodMotor = 7
+        const val HoodTBEncoder = 9 // DI/O
+    }
+
     object BallSystem {
         const val LowerConveyor = 10
         const val VerticalConveyor = 9
@@ -40,6 +55,14 @@ object Ports {
 
     object LEDSystem {
         const val Controller = 12
+    }
+
+    object Climber {
+        const val ClimberMotor = 11
+    }
+
+    object Winch {
+        const val WinchMotor = 12
     }
 
 }
