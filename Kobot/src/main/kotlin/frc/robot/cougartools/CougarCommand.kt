@@ -21,7 +21,7 @@ abstract class CougarCommand : CommandBase() {
     open fun grabValue(keyName: String): Any? { // Will automatically find it in the table
         for (table in CougarVars.ntTables) {
             if (table.containsKey(keyName)) {
-                var entry = table.getEntry(keyName)
+                var entry = table.getEntry(keyName) // Entry might be what I need...
                 return (entry.getValue()).getValue()
             }
         }
@@ -37,8 +37,6 @@ abstract class CougarCommand : CommandBase() {
 
         return mappy
     }
-
-    open fun pushPIDs() {} // Should be in subsystem
 
     open fun zeroNetworkTableKey(name: String) {}
 

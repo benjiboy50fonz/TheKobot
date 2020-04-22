@@ -15,6 +15,10 @@ object Winch : CougarSubsystem() {
 
     }
 
+    init {
+        setLocalTable("Winch")
+    }
+
     fun retractWinch() {
         winchMotor.set(0.8)
     }
