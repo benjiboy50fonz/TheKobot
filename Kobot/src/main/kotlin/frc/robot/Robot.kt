@@ -102,7 +102,7 @@ class Robot : TimedRobot() {
      * This method is called periodically during operator control.
      */
     override fun teleopPeriodic() {
-
+        println("running")
     }
 
     override fun testInit() {

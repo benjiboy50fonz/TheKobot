@@ -1,12 +1,11 @@
-package frc.robot.commands
+package frc.robot.commands.drivetrain
 
 import frc.robot.subsystems.DriveTrain
 
-import frc.robot.Layout
+import frc.robot.Controls
+import frc.robot.cougartools.CougarCommand
 
-import edu.wpi.first.wpilibj2.command.CommandBase
-
-class DriveCommand : CommandBase() {
+class DriveCommand : CougarCommand() {
 
     init {
         addRequirements(DriveTrain)
@@ -18,8 +17,8 @@ class DriveCommand : CommandBase() {
 
     override fun execute() {
         DriveTrain.move(
-            y = Layout.driveController.getRawAxis(1),
-            rotate = Layout.driveController.getRawAxis(3)
+            y = Controls.driverController.getRawAxis(1),
+            rotate = Controls.driverController.getRawAxis(3)
         )
     }
 

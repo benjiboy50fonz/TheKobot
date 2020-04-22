@@ -5,20 +5,16 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot
 
-import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Command
 
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
-import frc.robot.subsystems.BaseDrive;
-import frc.robot.subsystems.TankDrive;
+import frc.robot.commands.intake.RunIntake
+import frc.robot.commands.intake.RunOutake
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 
-import frc.robot.autonomous.Auto;
+import frc.robot.autonomous.Auto
 
 /**
  * This class is where the bulk of the robot should be declared.  Since Command-based is a
@@ -37,8 +33,8 @@ class RobotContainer
      */
     init {
         // Configure the button bindings
-        configureButtonBindings();
-        
+        configureButtonBindings()
+
     }
 
     /**
@@ -48,7 +44,12 @@ class RobotContainer
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
     fun configureButtonBindings() {
-     // Add stuff here   
+        Controls.driverController.A.toggleWhenPressed(RunIntake())
+        Controls.driverController.B.toggleWhenPressed(RunOutake())
+
+        Controls.operatorController.A.toggleWhenPressed(RunIntake())
+        Controls.operatorController.B.toggleWhenPressed(RunOutake())
+
     }
 
 
@@ -59,6 +60,6 @@ class RobotContainer
      */
     fun getAutonomousCommand(): Command {
         // An ExampleCommand will run in autonomous
-        return autonomousCommand;
+        return autonomousCommand
     }
 }

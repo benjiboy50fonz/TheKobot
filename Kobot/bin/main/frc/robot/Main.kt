@@ -5,11 +5,11 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot
 
-import frc.robot.Robot;
+import frc.robot.Robot
 
-import edu.wpi.first.wpilibj.RobotBase;
+import edu.wpi.first.wpilibj.RobotBase
 
 /**
  * Do NOT add any static variables to this class, or any initialization at all.

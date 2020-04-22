@@ -5,11 +5,13 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot;
+package frc.robot
 
-import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj.TimedRobot
+import edu.wpi.first.wpilibj2.command.Command
+import edu.wpi.first.wpilibj2.command.CommandScheduler
+
+import edu.wpi.first.networktables.NetworkTableInstance
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -68,12 +70,12 @@ class Robot : TimedRobot() {
      */
     override fun autonomousInit() {
 
-        autonomousCommand = robotContainer.getAutonomousCommand();
+        autonomousCommand = robotContainer.getAutonomousCommand()
 
         // schedule the autonomous command (example)
         if (autonomousCommand != null)
         {
-            autonomousCommand.schedule();
+            autonomousCommand.schedule()
         }
     }
 
@@ -92,7 +94,7 @@ class Robot : TimedRobot() {
         // this line or comment it out.
         if (autonomousCommand != null)
         {
-            autonomousCommand.cancel();
+            autonomousCommand.cancel()
         }
     }
 
@@ -100,12 +102,12 @@ class Robot : TimedRobot() {
      * This method is called periodically during operator control.
      */
     override fun teleopPeriodic() {
-
+        println("running")
     }
 
     override fun testInit() {
         // Cancels all running commands at the start of test mode.
-        CommandScheduler.getInstance().cancelAll();
+        CommandScheduler.getInstance().cancelAll()
     }
 
     /**

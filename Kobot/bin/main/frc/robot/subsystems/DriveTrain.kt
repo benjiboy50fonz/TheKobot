@@ -6,4 +6,4 @@ package frc.robot.subsystems
  * Here we add robot specific drivetrain modifications.
  */
 
-object DriveTrain : TankDrive() {} // This is so hot.
+object DriveTrain : TankDrive()  // This is so hot.

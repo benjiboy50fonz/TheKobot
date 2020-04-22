@@ -1,8 +1,8 @@
 package frc.robot
 
-import edu.wpi.first.wpilibj.XboxController
+object Controls {
 
-object Layout {
-    val driveController = XboxController(0)
-    val operatorController = XboxController(1)
+    val driverController = LogitechDualShock(Ports.Controllers.DriverControllerID)
+    val operatorController = LogitechDualShock(Ports.Controllers.OperatorControllerID)
+
 }
