@@ -5,7 +5,7 @@ import frc.robot.cougartools.CougarCommand
 import frc.robot.subsystems.BallSystem
 import frc.robot.subsystems.Intake
 
-class RunUntilLoaded : CougarCommand() {
+class RunUntilLoadedCommand : CougarCommand() {
 
     init {
         addRequirements(BallSystem)

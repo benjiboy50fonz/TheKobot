@@ -4,7 +4,7 @@ import frc.robot.cougartools.CougarCommand
 
 import frc.robot.subsystems.Intake
 
-class RunIntake : CougarCommand() {
+class RunIntakeCommand : CougarCommand() {
     init {
         addRequirements(Intake)
     }

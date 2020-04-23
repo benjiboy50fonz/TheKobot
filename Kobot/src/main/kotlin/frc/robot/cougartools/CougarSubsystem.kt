@@ -24,6 +24,9 @@ abstract class CougarSubsystem : SubsystemBase() {
     open fun setLocalTable(name: String) {
         localTableName = name
         myLocalTable = instance.getTable(localTableName)
+        if (myLocalTable !in CougarVars.ntTables) {
+            CougarVars.ntTables.add(myLocalTable)
+        }
     }
 
     open fun doWhileRunning(_delayingTask: () -> Unit, _waitingTask: () -> Unit) = runBlocking {
@@ -78,13 +81,12 @@ abstract class CougarSubsystem : SubsystemBase() {
         CougarVars.ntTables.add(table)
     }
 
-    open fun addValueToLocalTable(keyName: String, value: Any?) {
-        when (value) {
-            is String -> myLocalTable.getEntry(keyName).setString(value)
-            is Int -> myLocalTable.getEntry(keyName).setDouble(value.toDouble())
-            is Double -> myLocalTable.getEntry(keyName).setDouble(value)
-            is Boolean -> myLocalTable.getEntry(keyName).setBoolean(value)
-        }
+    open fun setValueToLocalTable(keyName: String, value: Any?) {
+        myLocalTable.getEntry(keyName).setValue(value)
+    }
+
+    open fun setValueToExternalTable(keyName: String, tableName: String, value: Any?) {
+        instance.getTable(tableName).getEntry(keyName).setValue(value)
     }
 
     open fun deleteEntryInLocalTable(keyName: String) {
@@ -93,7 +95,7 @@ abstract class CougarSubsystem : SubsystemBase() {
 
     open fun grabValueLocalTable(keyName: String): Any? { // Will automatically find it in the local table
         if (myLocalTable.containsKey(keyName)) {
-            return myLocalTable.getEntry(keyName)
+            return myLocalTable.getEntry(keyName).getValue()
         }
         throw Error("Key '$keyName' is not in the local table, the '$localTableName' table!")
     }
@@ -101,7 +103,7 @@ abstract class CougarSubsystem : SubsystemBase() {
     open fun grabValueExternalTable(keyName: String): Any? { // Only use this when not referencing the home table.
         for (table in CougarVars.ntTables) {
             if (table.containsKey(keyName)) {
-                return table.getEntry(keyName)
+                return table.getEntry(keyName).getValue()
             }
         }
 
