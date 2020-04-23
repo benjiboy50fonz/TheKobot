@@ -64,17 +64,11 @@ object Turret : CougarSubsystem() {
     fun getPosition(): Int { return (turretMotor.getSelectedSensorPosition(0)) }
 
     fun fieldMove(speed: Double) {
-        speedLimit = if (getPosition() < max - getPosition()) {
-            getPosition() * 0.0015
-        } else {
-            (max - getPosition()) * 0.0015
-        }
+        speedLimit = if (getPosition() < max - getPosition()) { getPosition() * 0.0015 }
+        else { (max - getPosition()) * 0.0015 }
 
-        speedLimit = if (speedLimit < 0.2) {
-            0.2
-        } else {
-            speedLimit
-        }
+        speedLimit = if (speedLimit < 0.2) { 0.2 }
+        else { speedLimit }
 
         var newSpeed = speed * speedLimit
 

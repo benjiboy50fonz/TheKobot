@@ -13,18 +13,18 @@ object Limelight : CougarSubsystem() {
     private const val height = targetHeight - limelightHeight // Displacement on robot.
 
     init {
-        setLocalTable("limelight")
+        setLocalTable("limelight") // Call local table functions after this for easy entry reference.
     }
 
     fun setPipeline(pl: Int) { setValueToLocalTable("pipeline", pl) }
 
-    fun getArea(): Double { return grabValueLocalTable("ta") as Double } // These doubles will probably need to be 'any's.
+    fun getArea(): Double { return grabValueLocal("ta") as Double } // These doubles will probably need to be 'any's.
 
-    fun getX(): Double { return grabValueLocalTable("tx") as Double }
+    fun getX(): Double { return grabValueLocal("tx") as Double }
 
-    fun getY(): Double { return grabValueLocalTable("ty") as Double }
+    fun getY(): Double { return grabValueLocal("ty") as Double }
 
-    fun getTape(): Boolean { return (grabValueLocalTable("tv") == 1) }
+    fun getTape(): Boolean { return (grabValueLocal("tv") == 1) }
 
     fun takeSnapshot() { setValueToLocalTable("snapshot", 1) }
 

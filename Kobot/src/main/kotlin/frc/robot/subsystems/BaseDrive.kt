@@ -28,7 +28,14 @@ abstract class BaseDrive : CougarSubsystem() {
 
     init {
         this._configureMotors() // Empty list for active motors, later configured.
+
+        for (motor in activeMotors) { // Configure PIDs
+            applyPIDFromLocal(motor, "P", "I", "D", "FF", "IZone") // Applies PIDs from the dashboard inputs with these keys
+        }
+
         navX.reset()
+        setLocalTable("DriveTrain")
+
     }
 
     fun move(x: Double = 0.0, y: Double, rotate: Double) {

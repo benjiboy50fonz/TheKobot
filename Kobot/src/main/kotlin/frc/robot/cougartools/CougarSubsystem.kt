@@ -1,6 +1,8 @@
 package frc.robot.cougartools
 
 import com.revrobotics.CANSparkMax
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX
 
 import edu.wpi.first.networktables.NetworkTable
 import edu.wpi.first.networktables.NetworkTableInstance
@@ -13,17 +15,29 @@ abstract class CougarSubsystem : SubsystemBase() {
 
     // A special, FRC 2539 parent class that will utilize coroutines.
 
-    private val instance = NetworkTableInstance.getDefault() // Global NT Instance
-
     open var localTableName: String = "" // NOTE: Incredibly important that this is overridden in the creation of a subsystem.
 
     open lateinit var myLocalTable: NetworkTable
 
+    open var defaultSlot: Int = 0
+
+    open var pidSets = mutableListOf<List<Double>>(mutableListOf(0.1, 0.0, 0.0, 0.0, 0.0))
+
     // Cougar var ntTables offers a global solution for all the commands.
 
-    open fun setLocalTable(name: String) {
+    open fun addPIDSet(slot: Int, p: Double, i: Double, d: Double, ff: Double, iz: Double) {
+        pidSets.add(slot, listOf<Double>(p, i, d, ff, iz))
+    }
+
+    open fun setDefaultPIDSlot(newSlot: Int) { defaultSlot = newSlot}
+
+    open fun getDefaultPIDSlot(): Int { return defaultSlot }
+
+    open fun getPIDSets(): List<List<Double>> { return pidSets } // For debugging purposes.
+
+    fun setLocalTable(name: String) {
         localTableName = name
-        myLocalTable = instance.getTable(localTableName)
+        myLocalTable = CougarVars.instance.getTable(localTableName)
         if (myLocalTable !in CougarVars.ntTables) {
             CougarVars.ntTables.add(myLocalTable)
         }
@@ -66,18 +80,49 @@ abstract class CougarSubsystem : SubsystemBase() {
 
     }
 
-    open fun pushPIDs(motor: Any?) {
+    open fun applyPIDFromLocal(motor: Any?, pN: String, iN: String,
+                      dN: String, ffN: String, izN: String)
+    { // The xN's are the key names for the gains or values.
+
         when (motor) {
-            is CANSparkMax -> publishSparkMAXPIDs(motor)
+            is CANSparkMax -> setSparkMAXPIDs(motor, pN, iN, dN, ffN, izN)
+            is WPI_TalonSRX -> setTalonSRXPIDs(motor, pN, iN, dN, ffN, izN)
+            is WPI_TalonFX -> setTalonFXPIDs(motor, pN, iN, dN, ffN, izN)
         }
     }
 
-    private fun publishSparkMAXPIDs(motor: CANSparkMax) {
+    private fun setTalonFXPIDs(motor: WPI_TalonFX, p: String, i: String, d: String, ff: String, iz: String) {
+        motor.apply {
+            config_kP(0, myLocalTable.getEntry(p).getDouble(pidSets[defaultSlot][0]), 0)
+            config_kI(0, myLocalTable.getEntry(i).getDouble(pidSets[defaultSlot][1]), 0)
+            config_kD(0, myLocalTable.getEntry(d).getDouble(pidSets[defaultSlot][2]), 0)
+            config_kF(0, myLocalTable.getEntry(ff).getDouble(pidSets[defaultSlot][3]), 0)
+            config_IntegralZone(0, myLocalTable.getEntry(iz).getDouble(pidSets[defaultSlot][4]).toInt(), 0)
+        }
+    }
 
+    private fun setTalonSRXPIDs(motor: WPI_TalonSRX, p: String, i: String, d: String, ff: String, iz: String) {
+        motor.apply {
+            config_kP(0, myLocalTable.getEntry(p).getDouble(pidSets[defaultSlot][0]), 0)
+            config_kI(0, myLocalTable.getEntry(i).getDouble(pidSets[defaultSlot][1]), 0)
+            config_kD(0, myLocalTable.getEntry(d).getDouble(pidSets[defaultSlot][2]), 0)
+            config_kF(0, myLocalTable.getEntry(ff).getDouble(pidSets[defaultSlot][3]), 0)
+            config_IntegralZone(0, myLocalTable.getEntry(iz).getDouble(pidSets[defaultSlot][4]).toInt(), 0)
+        }
+    }
+
+    private fun setSparkMAXPIDs(motor: CANSparkMax, p: String, i: String, d: String, ff: String, iz: String) {
+        motor.getPIDController().apply {
+            setP(myLocalTable.getEntry(p).getDouble(pidSets[defaultSlot][0])) // Sets the defaults as the first values in pidSets.
+            setI(myLocalTable.getEntry(i).getDouble(pidSets[defaultSlot][1]))
+            setD(myLocalTable.getEntry(d).getDouble(pidSets[defaultSlot][2]))
+            setFF(myLocalTable.getEntry(ff).getDouble(pidSets[defaultSlot][3]))
+            setIZone(myLocalTable.getEntry(iz).getDouble(pidSets[defaultSlot][4]))
+        }
     }
 
     open fun makeTable(name: String) { // Omit any '/'s from the "name" argument.
-        var table = instance.getTable(name)
+        var table = CougarVars.instance.getTable(name)
         CougarVars.ntTables.add(table)
     }
 
@@ -86,21 +131,21 @@ abstract class CougarSubsystem : SubsystemBase() {
     }
 
     open fun setValueToExternalTable(keyName: String, tableName: String, value: Any?) {
-        instance.getTable(tableName).getEntry(keyName).setValue(value)
+        CougarVars.instance.getTable(tableName).getEntry(keyName).setValue(value)
     }
 
     open fun deleteEntryInLocalTable(keyName: String) {
         myLocalTable.getEntry(keyName).delete()
     }
 
-    open fun grabValueLocalTable(keyName: String): Any? { // Will automatically find it in the local table
+    open fun grabValueLocal(keyName: String): Any? { // Will automatically find it in the local table
         if (myLocalTable.containsKey(keyName)) {
             return myLocalTable.getEntry(keyName).getValue()
         }
         throw Error("Key '$keyName' is not in the local table, the '$localTableName' table!")
     }
 
-    open fun grabValueExternalTable(keyName: String): Any? { // Only use this when not referencing the home table.
+    open fun grabValueExternal(keyName: String): Any? { // Only use this when not referencing the home table.
         for (table in CougarVars.ntTables) {
             if (table.containsKey(keyName)) {
                 return table.getEntry(keyName).getValue()
@@ -111,7 +156,7 @@ abstract class CougarSubsystem : SubsystemBase() {
     }
 
     open fun getTableKeys(tableName: String): MutableSet<String>? {
-        return instance.getTable(tableName).getKeys()
+        return CougarVars.instance.getTable(tableName).getKeys()
     }
 
     open fun getTableKeys(): Map<NetworkTable, Set<String>> {
