@@ -17,8 +17,8 @@ import edu.wpi.first.wpilibj.RobotBase
  * change the parameter class to the startRobot call.
  */
 
-//class Main {
-    //init {}
+class Main {
+    init {}
     
    /**
     * Main initialization method. Do not perform any initialization here.
@@ -26,8 +26,8 @@ import edu.wpi.first.wpilibj.RobotBase
     * If you change your main Robot class (name), change the parameter type.
     */
 
-    //companion object {
-    //    @JvmStatic 
+    companion object {
+        @JvmStatic 
         fun main(args: Array<String>) { RobotBase.startRobot(::Robot) }
-    //}
-//}
+    }
+}
