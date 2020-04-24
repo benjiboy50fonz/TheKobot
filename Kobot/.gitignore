@@ -207,3 +207,11 @@ gradle-app.setting
 
 # End of https://www.gitignore.io/api/java,gradle,intellij+iml,visualstudiocode,linux,macos,windows
 
+*.class
+/bin/
+
+.kotlin-for-frc/
+.project
+.classpath
+.settings
+.wpilib

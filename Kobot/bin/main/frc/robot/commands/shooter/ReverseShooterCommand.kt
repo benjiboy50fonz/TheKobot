@@ -1,21 +1,25 @@
-package frc.robot.commands.ballsystem
+package frc.robot.commands.shooter
 
 import frc.robot.cougartools.CougarCommand
 
+import frc.robot.subsystems.Shooter
 import frc.robot.subsystems.BallSystem
 
-class ReverseAll : CougarCommand() {
+class ReverseShooterCommand : CougarCommand() {
 
-    init{
+    init {
+        addRequirements(Shooter)
         addRequirements(BallSystem)
     }
 
     override fun initialize() {
         BallSystem.reverseAll()
+        Shooter.reverseShooter()
     }
 
     override fun end(interrupted: Boolean) {
         BallSystem.stopAll()
+        Shooter.stopShooter()
     }
 
 }

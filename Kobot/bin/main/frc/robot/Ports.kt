@@ -54,7 +54,7 @@ object Ports {
     }
 
     object LEDSystem {
-        const val Controller = 12
+        const val Controller = 12 // DI/O
     }
 
     object Climber {
@@ -62,7 +62,12 @@ object Ports {
     }
 
     object Winch {
-        const val WinchMotor = 12
+        const val WinchMotor = 14
+    }
+
+    object ColorWheel {
+        const val ColorWheelSpinnerMotor = 12
+        const val RaisingMotor = 15
     }
 
 }

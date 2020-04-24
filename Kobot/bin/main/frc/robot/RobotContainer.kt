@@ -9,8 +9,8 @@ package frc.robot
 
 import edu.wpi.first.wpilibj2.command.Command
 
-import frc.robot.commands.intake.RunIntake
-import frc.robot.commands.intake.RunOutake
+import frc.robot.commands.intake.RunIntakeCommand
+import frc.robot.commands.intake.RunOutakeCommand
 
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
 
@@ -44,11 +44,11 @@ class RobotContainer
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
     fun configureButtonBindings() {
-        Controls.driverController.A.toggleWhenPressed(RunIntake())
-        Controls.driverController.B.toggleWhenPressed(RunOutake())
+        Controls.driverController.A.toggleWhenPressed(RunIntakeCommand())
+        Controls.driverController.B.toggleWhenPressed(RunOutakeCommand())
 
-        Controls.operatorController.A.toggleWhenPressed(RunIntake())
-        Controls.operatorController.B.toggleWhenPressed(RunOutake())
+        Controls.operatorController.A.toggleWhenPressed(RunIntakeCommand())
+        Controls.operatorController.B.toggleWhenPressed(RunOutakeCommand())
 
     }
 
