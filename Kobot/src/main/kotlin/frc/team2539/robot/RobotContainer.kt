@@ -11,8 +11,22 @@ import edu.wpi.first.wpilibj2.command.Command
 
 import frc.team2539.robot.commands.intake.RunIntakeCommand
 import frc.team2539.robot.commands.intake.RunOutakeCommand
+import frc.team2539.robot.commands.intake.FumbleCommand
 
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser
+import frc.team2539.robot.commands.ballsystem.RunBallFlowCommandGroup
+import frc.team2539.robot.commands.ballsystem.RunUntilLoadedCommand
+import frc.team2539.robot.commands.ballsystem.ClearJamCommand
+
+import frc.team2539.robot.commands.hood.RaiseHoodCommand
+import frc.team2539.robot.commands.hood.LowerHoodCommand
+
+import frc.team2539.robot.commands.winch.PullWinchCommand
+
+import frc.team2539.robot.commands.climber.ElevateClimberCommand
+import frc.team2539.robot.commands.climber.LowerClimberCommand
+import frc.team2539.robot.commands.climber.RaiseClimberCommand
+
+import frc.team2539.robot.commands.limelight.SudoCommandGroup
 
 import frc.team2539.robot.autonomous.Auto
 
@@ -43,12 +57,25 @@ class RobotContainer
      * edu.wpi.first.wpilibj.Joystick Joystick} or {@link XboxController}), and then passing it to a
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
-    fun configureButtonBindings() {
-        Controls.driverController.A.toggleWhenPressed(RunIntakeCommand())
+    fun configureButtonBindings() { // Basic, most used controls.
+
+        Controls.driverController.A.toggleWhenPressed(RunUntilLoadedCommand())
         Controls.driverController.B.toggleWhenPressed(RunOutakeCommand())
 
-        Controls.operatorController.A.toggleWhenPressed(RunIntakeCommand())
-        Controls.operatorController.B.toggleWhenPressed(RunOutakeCommand())
+        Controls.driverController.LeftBumper.whileHeld(RaiseHoodCommand())
+        Controls.driverController.LeftTrigger.whileHeld(LowerHoodCommand())
+
+        Controls.driverController.RightBumper.whileHeld(ElevateClimberCommand())
+        Controls.driverController.RightTrigger.whileHeld(LowerClimberCommand())
+
+        Controls.operatorController.A.toggleWhenPressed(RunBallFlowCommandGroup())
+        Controls.operatorController.X.toggleWhenPressed(FumbleCommand())
+        Controls.operatorController.B.toggleWhenPressed(ClearJamCommand())
+
+        Controls.operatorController.RightBumper.whileHeld(RaiseHoodCommand())
+        Controls.operatorController.RightTrigger.whileHeld(LowerHoodCommand())
+
+        Controls.operatorController.LeftBumper.toggleWhenPressed(SudoCommandGroup())
 
     }
 

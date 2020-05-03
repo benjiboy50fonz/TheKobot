@@ -16,6 +16,7 @@ class DriveCommand : CougarCommand() {
     }
 
     override fun execute() {
+        print("Driving")
         DriveTrain.move(
             y = Controls.driverController.getRawAxis(1),
             rotate = Controls.driverController.getRawAxis(3)

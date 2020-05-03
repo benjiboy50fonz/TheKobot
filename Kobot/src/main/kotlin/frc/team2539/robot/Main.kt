@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.RobotBase
  * change the parameter class to the startRobot call.
  */
 
-class Main {
+class MainKt {
     init {}
     
    /**

@@ -139,10 +139,8 @@ abstract class CougarSubsystem : SubsystemBase() {
     }
 
     open fun grabValueLocal(keyName: String): Any? { // Will automatically find it in the local table
-        if (myLocalTable.containsKey(keyName)) {
-            return myLocalTable.getEntry(keyName).getValue()
-        }
-        throw Error("Key '$keyName' is not in the local table, the '$localTableName' table!")
+        try { return myLocalTable.getEntry(keyName).getValue() }
+        catch(e: Exception) { throw Error("Key '$keyName' is not in the local table, the '$localTableName' table!") }
     }
 
     open fun grabValueExternal(keyName: String): Any? { // Only use this when not referencing the home table.

@@ -8,6 +8,8 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType
 
 object Intake : CougarSubsystem() {
 
+    var fumbleDirection: Boolean = true
+
     private val intakeMotor = CANSparkMax(Ports.Intake.IntakeMotor, MotorType.kBrushless).apply {
         inverted = true
     }
@@ -26,6 +28,24 @@ object Intake : CougarSubsystem() {
 
     fun stopIntake() {
         intakeMotor.stopMotor()
+    }
+
+    fun fumbleReverse() {
+        intakeMotor.set(-0.35)
+    }
+
+    fun fumbleForward() {
+        intakeMotor.set(1.0)
+    }
+
+    fun fumble() { // Call every X seconds
+        when(fumbleDirection) {
+            true -> fumbleReverse()
+            false -> fumbleForward()
+        }
+
+        fumbleDirection = !fumbleDirection // Inverts it
+
     }
 
 }
