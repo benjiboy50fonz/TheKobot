@@ -9,6 +9,8 @@ package frc.team2539.robot
 
 import edu.wpi.first.wpilibj2.command.Command
 
+import frc.team2539.robot.subsystems.DriveTrain
+
 import frc.team2539.robot.commands.intake.RunIntakeCommand
 import frc.team2539.robot.commands.intake.RunOutakeCommand
 import frc.team2539.robot.commands.intake.FumbleCommand
@@ -45,9 +47,12 @@ class RobotContainer
     /**
      * The container for the robot.  Contains subsystems, OI devices, and commands.
      */
+
     init {
+
         // Configure the button bindings
         configureButtonBindings()
+        buildDefaults()
 
     }
 
@@ -76,6 +81,12 @@ class RobotContainer
         Controls.operatorController.RightTrigger.whileHeld(LowerHoodCommand())
 
         Controls.operatorController.LeftBumper.toggleWhenPressed(SudoCommandGroup())
+
+    }
+
+    fun buildDefaults() {
+
+        DriveTrain.lazyInit() // First reference build
 
     }
 

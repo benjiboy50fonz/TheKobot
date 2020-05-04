@@ -25,6 +25,8 @@ abstract class CougarSubsystem : SubsystemBase() {
 
     // Cougar var ntTables offers a global solution for all the commands.
 
+    open fun lazyInit() {} // Inits objects for defaults because of stupid lazy initialization lol.
+
     open fun addPIDSet(slot: Int, p: Double, i: Double, d: Double, ff: Double, iz: Double) {
         pidSets.add(slot, listOf<Double>(p, i, d, ff, iz))
     }
