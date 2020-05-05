@@ -8,7 +8,7 @@ import frc.team2539.robot.Ports
 
 import frc.team2539.robot.cougartools.CougarSubsystem
 
-object ColorWheel : CougarSubsystem() {
+object ColorWheel : CougarSubsystem("ColorWheel") {
 
     private val colors = listOf<String>("y", "r", "g", "b", "y", "r", "g", "b")
 

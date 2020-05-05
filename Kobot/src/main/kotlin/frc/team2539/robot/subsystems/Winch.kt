@@ -6,7 +6,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType
 import frc.team2539.robot.Ports
 import frc.team2539.robot.cougartools.CougarSubsystem
 
-object Winch : CougarSubsystem() {
+object Winch : CougarSubsystem("Winch") {
 
     private val winchMotor = CANSparkMax(Ports.Winch.WinchMotor, MotorType.kBrushless).apply {
 

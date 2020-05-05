@@ -1,5 +1,6 @@
 package frc.team2539.robot.subsystems
 
+import com.ctre.phoenix.motorcontrol.NeutralMode
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX
 import com.ctre.phoenix.motorcontrol.TalonFXControlMode
 
@@ -11,13 +12,13 @@ import frc.team2539.robot.commands.drivetrain.DriveCommand
 
 import frc.team2539.robot.cougartools.CougarSubsystem
 
-abstract class BaseDrive : CougarSubsystem() {
+abstract class BaseDrive : CougarSubsystem("DriveTrain") {
 
     open val driveMotors = listOf(
-            WPI_TalonFX(Ports.DriveMotors.FrontLeftMotor),
-            WPI_TalonFX(Ports.DriveMotors.FrontRightMotor),
-            WPI_TalonFX(Ports.DriveMotors.BackLeftMotor),
-            WPI_TalonFX(Ports.DriveMotors.BackRightMotor)
+            WPI_TalonFX(Ports.DriveMotors.FrontLeftMotor).apply { setNeutralMode(NeutralMode.Brake) },
+            WPI_TalonFX(Ports.DriveMotors.FrontRightMotor).apply { setNeutralMode(NeutralMode.Brake) },
+            WPI_TalonFX(Ports.DriveMotors.BackLeftMotor).apply { setNeutralMode(NeutralMode.Brake) },
+            WPI_TalonFX(Ports.DriveMotors.BackRightMotor).apply { setNeutralMode(NeutralMode.Brake) }
     )
 
     open var activeMotors = emptyList<WPI_TalonFX>()
@@ -29,12 +30,13 @@ abstract class BaseDrive : CougarSubsystem() {
     init {
         this._configureMotors() // Empty list for active motors, later configured.
 
+        println(activeMotors.toString())
+
         for (motor in activeMotors) { // Configure PIDs
             applyPIDFromLocal(motor, "P", "I", "D", "FF", "IZone") // Applies PIDs from the dashboard inputs with these keys
         }
 
         navX.reset()
-        setLocalTable("DriveTrain")
 
     }
 
@@ -75,8 +77,8 @@ abstract class BaseDrive : CougarSubsystem() {
         return listOf(0.0, 0.0)
     }
 
-    init {
-        defaultCommand = DriveCommand()
-    }
+    //init {
+      //  defaultCommand = DriveCommand()
+    //}
 
 }

@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase
 
 import kotlinx.coroutines.*
 
-abstract class CougarSubsystem : SubsystemBase() {
+abstract class CougarSubsystem(name: String = "") : SubsystemBase() {
 
     // A special, FRC 2539 parent class that will utilize coroutines.
 
-    open var localTableName: String = "" // NOTE: Incredibly important that this is overridden in the creation of a subsystem.
+    open var localTableName: String = name // NOTE: Incredibly important that this is overridden in the creation of a subsystem.
 
     open lateinit var myLocalTable: NetworkTable
 
@@ -23,9 +23,13 @@ abstract class CougarSubsystem : SubsystemBase() {
 
     open var pidSets = mutableListOf<List<Double>>(mutableListOf(0.1, 0.0, 0.0, 0.0, 0.0))
 
+    init {
+        setLocalTable(localTableName)
+    }
+
     // Cougar var ntTables offers a global solution for all the commands.
 
-    open fun lazyInit() {} // Inits objects for defaults because of stupid lazy initialization lol.
+    open fun lazyInit() {println("Init'd")} // Inits objects for defaults because of stupid lazy initialization lol.
 
     open fun addPIDSet(slot: Int, p: Double, i: Double, d: Double, ff: Double, iz: Double) {
         pidSets.add(slot, listOf<Double>(p, i, d, ff, iz))

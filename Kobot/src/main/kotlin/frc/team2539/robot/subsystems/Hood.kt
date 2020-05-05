@@ -11,7 +11,7 @@ import frc.team2539.robot.cougartools.CougarSubsystem
 
 import kotlin.math.abs
 
-object Hood : CougarSubsystem() {
+object Hood : CougarSubsystem("Hood") {
 
     private val hoodMotor = CANSparkMax(Ports.Hood.HoodMotor, MotorType.kBrushless)
 

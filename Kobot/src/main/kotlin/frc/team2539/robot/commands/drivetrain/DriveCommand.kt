@@ -1,9 +1,8 @@
 package frc.team2539.robot.commands.drivetrain
 
-import frc.team2539.robot.subsystems.DriveTrain
-
 import frc.team2539.robot.Controls
 import frc.team2539.robot.cougartools.CougarCommand
+import frc.team2539.robot.subsystems.DriveTrain
 
 class DriveCommand : CougarCommand() {
 
@@ -18,8 +17,8 @@ class DriveCommand : CougarCommand() {
     override fun execute() {
         print("Driving")
         DriveTrain.move(
-            y = Controls.driverController.getRawAxis(1),
-            rotate = Controls.driverController.getRawAxis(3)
+            y = Controls.driverController.getLeftY(),
+            rotate = Controls.driverController.getRightX()
         )
     }
 

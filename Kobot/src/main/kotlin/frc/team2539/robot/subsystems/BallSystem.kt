@@ -10,7 +10,7 @@ import frc.team2539.robot.cougartools.CougarSubsystem
 
 import frc.team2539.robot.Ports
 
-object BallSystem : CougarSubsystem() {
+object BallSystem : CougarSubsystem("BallSystem") {
 
     private val lowerConveyorMotor = WPI_TalonSRX(Ports.BallSystem.LowerConveyor).apply {
         setNeutralMode(NeutralMode.Brake)

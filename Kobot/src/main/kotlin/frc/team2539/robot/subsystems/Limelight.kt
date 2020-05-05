@@ -4,7 +4,7 @@ import frc.team2539.robot.cougartools.CougarSubsystem
 
 import kotlin.math.*
 
-object Limelight : CougarSubsystem() {
+object Limelight : CougarSubsystem("limelight") { // Name of limelight nt table
 
     private const val limelightHeight = 20.0 // Height on robot.
     private const val targetHeight = 90.75 // Height of ideal shooting target.

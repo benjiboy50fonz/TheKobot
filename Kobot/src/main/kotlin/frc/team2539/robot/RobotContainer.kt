@@ -52,7 +52,6 @@ class RobotContainer
 
         // Configure the button bindings
         configureButtonBindings()
-        buildDefaults()
 
     }
 
@@ -81,12 +80,6 @@ class RobotContainer
         Controls.operatorController.RightTrigger.whileHeld(LowerHoodCommand())
 
         Controls.operatorController.LeftBumper.toggleWhenPressed(SudoCommandGroup())
-
-    }
-
-    fun buildDefaults() {
-
-        DriveTrain.lazyInit() // First reference build
 
     }
 

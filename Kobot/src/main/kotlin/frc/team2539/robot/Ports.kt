@@ -21,8 +21,8 @@ object Ports {
 
     object DriveMotors {
         const val FrontLeftMotor = 1
-        const val FrontRightMotor = 2
-        const val BackLeftMotor = 3
+        const val FrontRightMotor = 3
+        const val BackLeftMotor = 2
         const val BackRightMotor = 4
     }
 

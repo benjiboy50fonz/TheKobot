@@ -33,15 +33,15 @@ class LogitechDualShock(id_: Int) : Joystick(id_) {
     }
 
     fun getRightX(): Double {
-        return this.getX(Hand.kRight)
+        return this.z
     }
 
     fun getLeftY(): Double {
-        return this.getY(Hand.kLeft)
+        return -this.getY(Hand.kLeft)
     }
 
     fun getRightY(): Double {
-        return this.getY(Hand.kRight)
+        return -this.getY(Hand.kRight)
     }
 
     fun createButton(button: Int): edu.wpi.first.wpilibj2.command.button.Button {

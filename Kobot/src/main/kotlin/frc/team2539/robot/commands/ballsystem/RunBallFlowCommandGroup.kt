@@ -11,12 +11,13 @@ class RunBallFlowCommandGroup : ParallelCommandGroup() { // This is rather wacky
 
     init {
 
-        addRequirements(Intake, BallSystem)
+        addRequirements(Intake)
+        addRequirements(BallSystem)
 
-        this.addCommands(
-                RunAllCommand(),
-                RunIntakeCommand()
-        )
+        //this.addCommands(
+          //      RunAllCommand(),
+         //       RunIntakeCommand()
+        //)
 
     }
 

@@ -9,7 +9,7 @@ import com.revrobotics.ControlType
 import frc.team2539.robot.Ports
 import frc.team2539.robot.cougartools.CougarSubsystem
 
-object Shooter : CougarSubsystem() {
+object Shooter : CougarSubsystem("Shooter") {
 
     private val shooterLeadMotor = CANSparkMax(Ports.Shooter.ShooterLeadMotor, MotorType.kBrushless).apply {
 

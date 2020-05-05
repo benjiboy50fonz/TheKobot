@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler
 import frc.team2539.robot.subsystems.DriveTrain
 
 import edu.wpi.first.networktables.NetworkTableInstance
+import frc.team2539.robot.commands.drivetrain.DriveCommand
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -98,6 +99,8 @@ class Robot : TimedRobot() {
         //{
           //  autonomousCommand.cancel()
         //}
+        buildDefaults()
+
     }
 
     /**
@@ -118,4 +121,12 @@ class Robot : TimedRobot() {
     override fun testPeriodic() {
         
     }
+
+    fun buildDefaults() {
+
+        DriveTrain.lazyInit()
+        DriveTrain.defaultCommand = DriveCommand() // First reference build
+
+    }
+
 }

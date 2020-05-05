@@ -9,7 +9,7 @@ import frc.team2539.robot.Ports
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 
-object Climber : CougarSubsystem() {
+object Climber : CougarSubsystem("Climber") {
 
     private val climberMotor = CANSparkMax(Ports.Climber.ClimberMotor,  MotorType.kBrushless).apply {
 

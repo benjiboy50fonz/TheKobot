@@ -10,7 +10,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice
 import frc.team2539.robot.Ports
 import frc.team2539.robot.cougartools.CougarSubsystem
 
-object Turret : CougarSubsystem() {
+object Turret : CougarSubsystem("Turret") {
 
     private val turretMotor = WPI_TalonSRX(Ports.Turret.TurretMotor).apply {
 

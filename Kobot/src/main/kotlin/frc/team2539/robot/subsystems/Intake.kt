@@ -6,7 +6,7 @@ import frc.team2539.robot.cougartools.CougarSubsystem
 import com.revrobotics.CANSparkMax
 import com.revrobotics.CANSparkMaxLowLevel.MotorType
 
-object Intake : CougarSubsystem() {
+object Intake : CougarSubsystem("Intake") {
 
     var fumbleDirection: Boolean = true
 
