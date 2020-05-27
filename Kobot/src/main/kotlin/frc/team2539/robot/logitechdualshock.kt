@@ -1,11 +1,6 @@
 package frc.team2539.robot
 
-import edu.wpi.first.wpilibj.Joystick
-
-import edu.wpi.first.wpilibj2.command.button.JoystickButton
-import edu.wpi.first.wpilibj2.command.button.POVButton
-
-class LogitechDualShock(id_: Int) : Joystick(id_) {
+class LogitechDualShock(id_: Int) : Benstick(id_) {
 
     val A = createButton(2)
     val B = createButton(3)
@@ -42,14 +37,6 @@ class LogitechDualShock(id_: Int) : Joystick(id_) {
 
     fun getRightY(): Double {
         return -this.getY(Hand.kRight)
-    }
-
-    fun createButton(button: Int): edu.wpi.first.wpilibj2.command.button.Button {
-        return if (button >= 20) {
-            POVButton(this, button)
-        } else {
-            JoystickButton(this, button)
-        }
     }
 
 }
