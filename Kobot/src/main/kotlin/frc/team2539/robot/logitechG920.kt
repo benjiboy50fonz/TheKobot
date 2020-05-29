@@ -26,7 +26,7 @@ class LogitechG920(id_: Int) : Benstick(id_) {
     private var brakeVal: Double = 0.0
     private var accelVal: Double = 0.0
 
-    private fun getWheel(): Double { return this.getRawAxis(0) }
+    private fun getWheel(): Double { return this.getRawAxis(0) * 1.5} // 50% multiplier
 
     private fun getAccelerator(): Double { return this.getRawAxis(1) }
 
@@ -35,8 +35,8 @@ class LogitechG920(id_: Int) : Benstick(id_) {
     private fun getClutch(): Double { return this.getRawAxis(3) }
 
     private fun getSpeed(): Double { // Returns a negative one to one double, like a joystick. You're welcome.
-        accelVal = (-getAccelerator() + 1) / 2
-        brakeVal = -1 * ((-getBrake() + 1) / 2)
+        accelVal = (-getAccelerator() + 1) / 2.75
+        brakeVal = (-getBrake() + 1) / -0.5
 
         return accelVal + brakeVal // Oww.
     }

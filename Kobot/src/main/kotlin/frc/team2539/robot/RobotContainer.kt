@@ -61,16 +61,16 @@ class RobotContainer
      * edu.wpi.first.wpilibj.Joystick Joystick} or {@link XboxController}), and then passing it to a
      * {@link edu.wpi.first.wpilibj2.command.button.JoystickButton JoystickButton}.
      */
-    fun configureButtonBindings() { // Basic, most used controls.
+    private fun configureButtonBindings() { // Basic, most used controls.
 
-        Controls.driverController.A.toggleWhenPressed(RunUntilLoadedCommand())
-        Controls.driverController.B.toggleWhenPressed(RunOutakeCommand())
+        Controls.driverController.RightPaddle.toggleWhenPressed(RunUntilLoadedCommand())
+        Controls.driverController.LeftPaddle.toggleWhenPressed(RunOutakeCommand())
 
-        Controls.driverController.LeftBumper.whileHeld(RaiseHoodCommand())
-        Controls.driverController.LeftTrigger.whileHeld(LowerHoodCommand())
+        Controls.driverController.A.whileHeld(RaiseHoodCommand())
+        Controls.driverController.B.whileHeld(LowerHoodCommand())
 
         Controls.driverController.RightBumper.whileHeld(ElevateClimberCommand())
-        Controls.driverController.RightTrigger.whileHeld(LowerClimberCommand())
+        Controls.driverController.LeftBumper.whileHeld(LowerClimberCommand())
 
         Controls.operatorController.A.toggleWhenPressed(RunBallFlowCommandGroup())
         Controls.operatorController.X.toggleWhenPressed(FumbleCommand())
